@@ -8,6 +8,15 @@ use yii\widgets\Pjax;
 use kartik\export\ExportMenu;
 
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
+    [
+                'class' => 'kartik\grid\ExpandRowColumn',
+                'value' => function ($model, $key, $index, $column) {
+                    return GridView::ROW_COLLAPSED;
+                },
+                'detail' => function ($model, $key, $index, $column) {
+                    return $this->render('_item_view', ['model'=>$model->listPembelian]);
+                },
+            ],
             'no_dokumen',
             'tanggal:date',
             [

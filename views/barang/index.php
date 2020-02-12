@@ -5,18 +5,18 @@ use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax; use kartik\export\ExportMenu;
-$gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
+$gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             'kode',
             'nama',
             [
-             'attribute' =>'Jenis Barang',   
+             'attribute' =>'Jenis Barang',
              'value'=>'jenisBarang.nama',
             ],
             [
-                'attribute' =>'Satuan Std.',   
+                'attribute' =>'Satuan Std.',
                 'value'=>'satuan_std.nama',
             ],
-               
+
          ['class' => 'kartik\grid\ActionColumn',   'template' => Mimin::filterActionColumn([
               'update','delete','view'],$this->context->route),    ],    ];
 
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax' => true,
         'bordered' => true,
         'striped' => false,
-        'condensed' => false,
+        'condensed' => true,
 
         'panel' => [
             'type' => GridView::TYPE_INFO,
