@@ -59,7 +59,6 @@ $gudang = ArrayHelper::map(
     ]) ?>
 
 
-    <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
 </div>
     </div>
 
@@ -94,10 +93,29 @@ $gudang = ArrayHelper::map(
         ]
     ]);
     ?>
+     <tfoot>
+     <td colspan="4" align="right"> Total </td>
+    <td id="total" colspan="4" > <?=yii::$app->formatter->asDecimal($model->total,2)?> </td>
+
+    </tfoot>
+
     </table>
     </div>
     </div>
+<div class="row">
+     <div class="col-md-6">
+     <?=$form->field($model, 'jenis_ppn')->dropDownList(['PPN-IN' =>'PPN INCLUDE' , 'PPN-EX' =>'PPN EXCLUDE' ,'NON-PPN' =>'NON PPN']) ?>
+</div>
+ <div class="col-md-6">
+     <?=$form->field($model, 'ppn')->label('PPN (%)') ?>
+</div>
+</div>
+     <?=$form->field($model, 'dpp') ?>
+     <?=$form->field($model, 'grand_total') ?>
 
+
+
+    <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

@@ -34,7 +34,7 @@ class Pembelian extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['no_dokumen', 'id_supplier','id_gudang'], 'required'],
+            [['no_dokumen', 'id_supplier','id_gudang','jenis_ppn'], 'required'],
             [['tanggal'], 'safe'],
             [['id_supplier'], 'integer'],
             [['keterangan'], 'string'],
@@ -76,9 +76,25 @@ class Pembelian extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
 
+     public function getTotal() {
+         return $this->hasMany(ItemPembelian::className(), ['id_pembelian' => 'id'])->sum('sub_total');
+     }
+
+     public function getDpp() {
+         return $this->jenis_ppn=='PPN-IN'?$this->total*100/(100+$this->ppn):$this->total ;
+     }
+
+     public function getGrand_total() {
+         return $this->dpp + ($this->ppn/100*$this->dpp);
+     }
     public function getSupplier()
     {
         return $this->hasOne(Supplier::className(), ['id' => 'id_supplier']);
+    }
+
+    public function getPpn()
+    {
+        return yii::$app->params['ppn'];
     }
 
     public function getGudang()
